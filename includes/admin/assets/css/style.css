@@ -1,0 +1,88 @@
+#mx_builder_components_container {
+    border: 2px solid #e5e4e8;
+    margin: 10px 0px;
+    padding: 10px;
+}
+#mx_builder_add_button_wrap {
+    text-align: center;
+}
+#mx_builder_add_button {
+    
+}
+
+/**/
+#mx_builder_list_of_items_box {
+    border: 1px solid #e5e4e8;
+    margin: 5px;
+    padding: 5px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #f7f8ff;
+}
+#mx_builder_list_of_items_box > div {
+    border: 2px solid #e5e4e8;
+    padding: 20px;
+    margin: 2px;
+    cursor: pointer;
+    background-color: #fbffef;
+}
+#mx_builder_list_of_items_box > div:hover {
+    background-color: #ebf5cd;
+}
+
+/**/
+.mx_builder_build_stream_element {
+    border: 1px solid #e5e4e8;
+    margin: 5px;
+    padding: 5px;
+    background-color: #f7f8ff;
+}
+.mx_builder_build_stream_element_header {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 10px 6px;
+    font-weight: bold;
+    background: #e8e7f3;
+    color: #7c7c8a;
+}
+.mx_builder_build_stream_element_management {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    align-items: center;
+}
+.mx_builder_build_stream_element_management > span {
+    background-color: #f3f3f3;
+    padding: 5px;
+    margin: 0px 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.mx_builder_build_stream_element_management > span:hover {
+    background-color: #d8dad8;
+}
+.mx_builder_button_none {
+    display: none !important;
+}
