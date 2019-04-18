@@ -31,6 +31,16 @@ jQuery( document ).ready( function( $ ) {
 	mx_builder_app.container.append( '<div id="mx_builder_components_container"></div>' );
 
 	/*
+	* Set up default value
+	*
+	*/
+	mx_builder_app.init = function() {
+
+		mx_builder_app.moving_build_elements();
+
+	}
+
+	/*
 	* build elemets container
 	*/
 	$( '#mx_builder_components_container' ).append( '<div id="mx_builder_elemets_container"></div>' );
@@ -79,6 +89,9 @@ jQuery( document ).ready( function( $ ) {
 		// management
 		mx_builder_app.show_management_button();
 
+		// insert shortcodes to the textarea
+		mx_builder_app.placed_shortcodes();
+
 	} );
 
 	/*
@@ -87,8 +100,6 @@ jQuery( document ).ready( function( $ ) {
 	mx_builder_app.show_management_button = function() {
 
 		var count_of_elements = $( '#mx_builder_elemets_container' ).find( '.mx_builder_build_stream_element' ).length;
-
-		console.log( count_of_elements );
 
 		$( '#mx_builder_elemets_container' ).find( '.mx_builder_build_stream_element' ).each( function() {
 
@@ -111,6 +122,135 @@ jQuery( document ).ready( function( $ ) {
 		} );
 
 	}
+
+	/*
+	* moving build elements
+	*/
+	mx_builder_app.moving_build_elements = function() {
+
+		// move to top
+		$( '#mx_builder_elemets_container' ).on( 'click', '.mx_builder_b_s_e_lift_item', function() {
+
+			var current_element = $( this ).parent().parent().parent();
+
+			var prev_element = $( this ).parent().parent().parent().prev();
+
+			mx_builder_app.effect_move_to_top( current_element );
+
+			setTimeout( function() {
+
+				prev_element.before( current_element );
+
+				// management buttons
+				mx_builder_app.show_management_button();
+
+				// insert shortcodes to the textarea
+				mx_builder_app.placed_shortcodes();
+
+			}, 500 );
+
+		} );
+
+		// move to bottom
+		$( '#mx_builder_elemets_container' ).on( 'click', '.mx_builder_b_s_e_drop_item', function() {
+
+			var current_element = $( this ).parent().parent().parent();
+
+			var prev_element = $( this ).parent().parent().parent().next();
+
+			mx_builder_app.effect_move_to_bottom( current_element );
+
+			setTimeout( function() {
+
+				prev_element.after( current_element );
+
+				// management buttons
+				mx_builder_app.show_management_button();
+
+				// insert shortcodes to the textarea
+				mx_builder_app.placed_shortcodes();
+
+			}, 500 );
+
+		} );
+
+	};
+
+	/*
+	* get shortcodes
+	*/
+	mx_builder_app.generate_shortcodes = function() {
+
+		var return_shortcodes = '';
+
+		$( '#mx_builder_elemets_container' ).find( '.mx_builder_build_stream_element' ).each( function() {
+
+			var return_shortcode = '[mx_builder_elemet';
+
+			var type_shortcode = $( this ).attr( 'data-type-shortcode' );
+
+			return_shortcode += ' type_shortcode="' + type_shortcode + '"';
+
+			var shortcode_id = $( this ).attr( 'data-shortcode-id' );
+
+			return_shortcode += ' shortcode_id="' + shortcode_id + '"';
+
+			return_shortcode += ']';
+
+			return_shortcodes += return_shortcode + ' ';
+
+		} );
+
+		return return_shortcodes;
+
+	}
+
+	/*
+	*  place shortcode to the textarea
+	*/
+	mx_builder_app.placed_shortcodes = function() {
+
+		$( '#content' ).val( '' );
+
+		$( '#content' ).val( mx_builder_app.generate_shortcodes() );
+
+	};
+
+	/*****************
+	* effects
+	*/
+		/*
+		* move element to top
+		*/
+		mx_builder_app.effect_move_to_top = function( element ) {
+
+			$( element ).addClass( 'mx_builder_effect_move_to_top' );
+
+			setTimeout( function() {
+
+				$( element ).removeClass( 'mx_builder_effect_move_to_top' );
+
+			}, 400 );
+
+		}
+
+		/*
+		* move element to bottom
+		*/
+		mx_builder_app.effect_move_to_bottom = function( element ) {
+
+			$( element ).addClass( 'mx_builder_effect_move_to_bottom' );
+
+			setTimeout( function() {
+
+				$( element ).removeClass( 'mx_builder_effect_move_to_bottom' );
+
+			}, 400 );
+
+		}
+
+	// init
+	mx_builder_app.init();
 
 } );
 

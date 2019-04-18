@@ -86,3 +86,17 @@
 .mx_builder_button_none {
     display: none !important;
 }
+
+/*effects*/
+.mx_builder_effect_move_to_top {
+    position: absolute;
+    margin-top: -100px;
+    -webkit-transition: 0.4s all ease;
+    transition: 0.4s all ease;
+}
+.mx_builder_effect_move_to_bottom {
+    margin-top: 100px;
+    position: absolute;
+    -webkit-transition: 0.4s all ease;
+    transition: 0.4s all ease;
+}
