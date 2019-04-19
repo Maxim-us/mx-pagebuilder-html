@@ -1,17 +1,14 @@
-var mx_builder_list_of_items = [
-	{
-		shortcode_name: 'mx_builder_element',
-		element_id: 1
-	},
-	{
-		shortcode_name: 'mx_builder_element',
-		element_id: 2
-	},
-	{
-		shortcode_name: 'mx_builder_element',
-		element_id: 3
-	}
-];
+// mx_builder_localize.mx_builder_list_of_items = [
+// 	{
+// 		element_id: 1
+// 	},
+// 	{
+// 		element_id: 2
+// 	},
+// 	{
+// 		element_id: 3
+// 	}
+// ];
 
 jQuery( document ).ready( function( $ ) {
 
@@ -63,10 +60,10 @@ jQuery( document ).ready( function( $ ) {
 	/*
 	* set builder elements to the list
 	*/
-	$.each( mx_builder_list_of_items, function() {
+	$.each( mx_builder_localize.mx_builder_list_of_items, function() {
 
 		// console.log( this );
-		$( '#mx_builder_list_of_items_box' ).append( mx_builder_element_body( this.shortcode_name, this.element_id ) );
+		$( '#mx_builder_list_of_items_box' ).append( mx_builder_element_body( this.element_id, this.template_name, this.template_short_name ) );
 
 	} );
 
@@ -78,11 +75,12 @@ jQuery( document ).ready( function( $ ) {
 		var _this = $( this );
 
 		var _data = {
-			type_shortcode: _this.attr( 'data-type-shortcode' ),
-			shortcode_id: _this.attr( 'data-shortcode-id' )
+			shortcode_id: 			_this.attr( 'data-shortcode-id' ),
+			template_name: 			_this.attr( 'data-template-name' ),
+			template_short_name: 	_this.attr( 'data-template-short-name' )
 		};
 
-		var new_element = mx_builder_create_new_b_e_for_stream( _data.type_shortcode, _data.shortcode_id );
+		var new_element = mx_builder_create_new_b_e_for_stream( _data.shortcode_id, _data.template_name, _data.template_short_name );
 
 		$( new_element ).appendTo( '#mx_builder_elemets_container' );
 
@@ -187,10 +185,6 @@ jQuery( document ).ready( function( $ ) {
 
 			var return_shortcode = '[mx_builder_elemet';
 
-			var type_shortcode = $( this ).attr( 'data-type-shortcode' );
-
-			return_shortcode += ' type_shortcode="' + type_shortcode + '"';
-
 			var shortcode_id = $( this ).attr( 'data-shortcode-id' );
 
 			return_shortcode += ' shortcode_id="' + shortcode_id + '"';
@@ -254,18 +248,18 @@ jQuery( document ).ready( function( $ ) {
 
 } );
 
-// skeleton of builder element
-function mx_builder_element_body( type_shortcode, shortcode_id ) {
+// builder element icon
+function mx_builder_element_body( shortcode_id, template_name, template_short_name ) {
 
 	var html = '';
 
 	// _________
 
-	html += '<div class="mx_builder_virtual_element" data-type-shortcode="' + type_shortcode + '" data-shortcode-id="' + shortcode_id + '">'; // start wrap
+	html += '<div class="mx_builder_virtual_element" data-template-short-name="' + template_short_name + '" data-template-name="' + template_name + '" data-shortcode-id="' + shortcode_id + '" title="' + template_name + '">'; // start wrap
 
 		html += '<div class="mx_builder_v_e_title">';
 
-			html += shortcode_id;
+			html += '<span>' + template_short_name + '</span>';
 
 		html += '</div>';
 
@@ -276,17 +270,15 @@ function mx_builder_element_body( type_shortcode, shortcode_id ) {
 }
 
 // new element to the build stream
-function mx_builder_create_new_b_e_for_stream( type_shortcode, shortcode_id ) {
+function mx_builder_create_new_b_e_for_stream( shortcode_id, template_name, template_short_name ) {
 
 	var html = '';
 
-	html += '<div class="mx_builder_build_stream_element" data-type-shortcode="' + type_shortcode + '" data-shortcode-id="' + shortcode_id + '">';
+	html += '<div class="mx_builder_build_stream_element" data-shortcode-id="' + shortcode_id + '">';
 
 		html += '<div class="mx_builder_build_stream_element_header">';
 
-			html += '<div>Element #' + shortcode_id + '</div>';
-
-			html += '<div>Element shortcode' + type_shortcode + '</div>';
+			html += '<div>El. - ' + template_short_name + '</div>';
 
 			html += '<div class="mx_builder_build_stream_element_management"><span class="mx_builder_b_s_e_lift_item">To top</span><span class="mx_builder_b_s_e_drop_item">To bottom</span></div>';
 

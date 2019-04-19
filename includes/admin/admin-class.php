@@ -37,6 +37,13 @@ class MXMPH_Admin_Main
 
 		$mx_builder_instance->mx_builder_enable_html_editor();
 
+		// get template files
+		mxmph_require_class_file_admin( 'get-template-files.php' );
+
+		$get_template_files_instance = new MXMPH_Get_Template_Files();
+
+		$get_template_files_instance->mx_builder_parse_template_folder();
+
 	}
 
 	/*
