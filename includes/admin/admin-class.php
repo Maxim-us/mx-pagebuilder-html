@@ -44,6 +44,13 @@ class MXMPH_Admin_Main
 
 		$get_template_files_instance->mx_builder_parse_template_folder();
 
+		// add metabox
+		mxmph_require_class_file_admin( 'add_meta_boxes.php' );
+
+		$meta_boxes_instance = new MXMPH_Add_Meta_Boxes();
+
+		$meta_boxes_instance->mx_builder_create_meta_box();
+
 	}
 
 	/*

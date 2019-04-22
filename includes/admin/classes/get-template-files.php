@@ -6,17 +6,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class MXMPH_Get_Template_Files
 {
 
-	public $template_array = array();
-
-	public $template_dir =  MXMPH_PLUGIN_ABS_PATH . 'includes/admin/build-templates/';
-
 	/*
-	* MXMPHCPTclass constructor
+	* MXMPH_Get_Template_Files constructor
 	*/
 	public function __construct()
 	{		
 		
 	}
+
+	public $template_array = array();
+
+	public $template_dir =  MXMPH_PLUGIN_ABS_PATH . 'includes/admin/build-templates/';
 	
 	// disable tinyMCE
 	public function mx_builder_parse_template_folder()

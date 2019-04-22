@@ -33,9 +33,16 @@ jQuery( document ).ready( function( $ ) {
 	*/
 	mx_builder_app.init = function() {
 
+		// movement elements of stream
 		mx_builder_app.moving_build_elements();
 
-	}
+		// remove element of stream
+		mx_builder_app.remove_element();
+
+		// meta
+		mx_builder_app.repair_builder();
+
+	};
 
 	/*
 	* build elemets container
@@ -90,6 +97,10 @@ jQuery( document ).ready( function( $ ) {
 		// insert shortcodes to the textarea
 		mx_builder_app.placed_shortcodes();
 
+		// create metadeta
+		mx_builder_app.save_meta_box();
+
+
 	} );
 
 	/*
@@ -119,7 +130,30 @@ jQuery( document ).ready( function( $ ) {
 
 		} );
 
-	}
+	};
+
+	/*
+	* remove element
+	*/
+	mx_builder_app.remove_element = function() {
+
+		$( '#mx_builder_elemets_container' ).on( 'click', '.mx_builder_build_stream_element_remove_element', function() {
+
+			// remove element
+			$( this ).parent().parent().remove();
+
+			// management
+			mx_builder_app.show_management_button();
+
+			// insert shortcodes to the textarea
+			mx_builder_app.placed_shortcodes();
+
+			// create metadeta
+			mx_builder_app.save_meta_box();
+
+		} );
+
+	};
 
 	/*
 	* moving build elements
@@ -145,6 +179,9 @@ jQuery( document ).ready( function( $ ) {
 				// insert shortcodes to the textarea
 				mx_builder_app.placed_shortcodes();
 
+				// create metadeta
+				mx_builder_app.save_meta_box();
+
 			}, 500 );
 
 		} );
@@ -167,6 +204,9 @@ jQuery( document ).ready( function( $ ) {
 
 				// insert shortcodes to the textarea
 				mx_builder_app.placed_shortcodes();
+
+				// create metadeta
+				mx_builder_app.save_meta_box();
 
 			}, 500 );
 
@@ -197,7 +237,7 @@ jQuery( document ).ready( function( $ ) {
 
 		return return_shortcodes;
 
-	}
+	};
 
 	/*
 	*  place shortcode to the textarea
@@ -207,6 +247,66 @@ jQuery( document ).ready( function( $ ) {
 		$( '#content' ).val( '' );
 
 		$( '#content' ).val( mx_builder_app.generate_shortcodes() );
+
+	};
+
+	/*
+	* Repair builder
+	*/ 
+	mx_builder_app.repair_builder = function() {		
+
+		var meta_data_arry = mx_builder_app.get_meta_box();
+
+		$.each( meta_data_arry, function() {
+
+			var _this = this;
+
+			var new_element = mx_builder_create_new_b_e_for_stream( _this.shortcode_id, _this.template_name, _this.template_short_name );
+
+			$( new_element ).appendTo( '#mx_builder_elemets_container' );
+
+			// management
+			mx_builder_app.show_management_button();
+
+		} );
+		
+	}
+
+	/*
+	* save meta data
+	*/
+	mx_builder_app.save_meta_box = function() {
+
+		var _data = [];
+
+		$( '#mx_builder_elemets_container' ).find( '.mx_builder_build_stream_element' ).each( function() {
+
+			var shortcode_id 		= $( this ).attr( 'data-shortcode-id' );
+			var template_name 		= $( this ).attr( 'data-template-name' );
+			var template_short_name = $( this ).attr( 'data-template-short-name' );
+
+			_data.push( {
+				shortcode_id: shortcode_id,
+				template_name: template_name,
+				template_short_name: template_short_name
+			} );
+
+		} );
+
+		var serialize_data = JSON.stringify( _data );
+
+		$( '#mx_builder_array_input' ).val( serialize_data );
+
+	};	
+
+	/*
+	* get meta data
+	*/
+	mx_builder_app.get_meta_box = function() {
+
+		var _meta_data = $( '#mx_builder_array_input' ).val();
+
+		return JSON.parse( _meta_data );
 
 	};
 
@@ -226,7 +326,7 @@ jQuery( document ).ready( function( $ ) {
 
 			}, 400 );
 
-		}
+		};
 
 		/*
 		* move element to bottom
@@ -241,8 +341,8 @@ jQuery( document ).ready( function( $ ) {
 
 			}, 400 );
 
-		}
-
+		};
+	
 	// init
 	mx_builder_app.init();
 
@@ -274,13 +374,15 @@ function mx_builder_create_new_b_e_for_stream( shortcode_id, template_name, temp
 
 	var html = '';
 
-	html += '<div class="mx_builder_build_stream_element" data-shortcode-id="' + shortcode_id + '">';
+	html += '<div class="mx_builder_build_stream_element" data-template-short-name="' + template_short_name + '" data-template-name="' + template_name + '" data-shortcode-id="' + shortcode_id + '">';
 
 		html += '<div class="mx_builder_build_stream_element_header">';
 
 			html += '<div>El. - ' + template_short_name + '</div>';
 
 			html += '<div class="mx_builder_build_stream_element_management"><span class="mx_builder_b_s_e_lift_item">To top</span><span class="mx_builder_b_s_e_drop_item">To bottom</span></div>';
+
+			html += '<div class="mx_builder_build_stream_element_remove_element"><span>x</span></div>';
 
 		html += '</div>';
 

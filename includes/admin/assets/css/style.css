@@ -100,3 +100,18 @@
     -webkit-transition: 0.4s all ease;
     transition: 0.4s all ease;
 }
+
+/**/
+.mx_builder_build_stream_element_remove_element {
+    background-color: #f3f3f3;
+    padding: 5px;
+    margin: 0px 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.mx_builder_build_stream_element_remove_element:hover {
+    background-color: #cc4336;
+    color: #fff;
+}
