@@ -44,7 +44,9 @@ class MXMPH_Add_Meta_Boxes
 
 		wp_nonce_field( MXMPH_PLUGN_BASE_NAME, 'mx_builder_noncename' );
 
-		echo '<input type="text" id="mx_builder_array_input" name="mx_builder_array_input" value="' . esc_attr( $data ) . '" />';
+		// var_dump( htmlspecialchars( $data, ENT_QUOTES) );
+
+		echo '<input type="text" id="mx_builder_array_input" name="mx_builder_array_input" value="' . htmlspecialchars( $data, ENT_QUOTES) . '" />';
 
 	}
 

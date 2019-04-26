@@ -42,6 +42,12 @@ jQuery( document ).ready( function( $ ) {
 		// meta
 		mx_builder_app.repair_builder();
 
+		// open editor
+		mx_builder_app.open_editor();
+
+		// close editor
+		mx_builder_app.close_editor_save_data();
+
 	};
 
 	/*
@@ -223,11 +229,17 @@ jQuery( document ).ready( function( $ ) {
 
 		$( '#mx_builder_elemets_container' ).find( '.mx_builder_build_stream_element' ).each( function() {
 
+			var full_content = $( this ).find( '.mx_builder_build_stream_element_body' ).html();
+
+			full_content = mx_builder_encode_html( full_content );
+
 			var return_shortcode = '[mx_builder_elemet';
 
 			var shortcode_id = $( this ).attr( 'data-shortcode-id' );
 
 			return_shortcode += ' shortcode_id="' + shortcode_id + '"';
+
+			return_shortcode += ' full_content="' + full_content + '"';
 
 			return_shortcode += ']';
 
@@ -257,11 +269,13 @@ jQuery( document ).ready( function( $ ) {
 
 		var meta_data_arry = mx_builder_app.get_meta_box();
 
+		// console.log( meta_data_arry );
+
 		$.each( meta_data_arry, function() {
 
 			var _this = this;
 
-			var new_element = mx_builder_create_new_b_e_for_stream( _this.shortcode_id, _this.template_name, _this.template_short_name );
+			var new_element = mx_builder_create_new_b_e_for_stream( _this.shortcode_id, _this.template_name, _this.template_short_name, _this.full_content );
 
 			$( new_element ).appendTo( '#mx_builder_elemets_container' );
 
@@ -281,6 +295,10 @@ jQuery( document ).ready( function( $ ) {
 
 		$( '#mx_builder_elemets_container' ).find( '.mx_builder_build_stream_element' ).each( function() {
 
+			var _full_content = $( this ).find( '.mx_builder_build_stream_element_body' ).html();
+
+			var full_content = mx_builder_encode_html( _full_content );
+
 			var shortcode_id 		= $( this ).attr( 'data-shortcode-id' );
 			var template_name 		= $( this ).attr( 'data-template-name' );
 			var template_short_name = $( this ).attr( 'data-template-short-name' );
@@ -288,12 +306,15 @@ jQuery( document ).ready( function( $ ) {
 			_data.push( {
 				shortcode_id: shortcode_id,
 				template_name: template_name,
-				template_short_name: template_short_name
+				template_short_name: template_short_name,
+				full_content: full_content
 			} );
 
 		} );
 
 		var serialize_data = JSON.stringify( _data );
+
+		// console.log( serialize_data );
 
 		$( '#mx_builder_array_input' ).val( serialize_data );
 
@@ -306,8 +327,79 @@ jQuery( document ).ready( function( $ ) {
 
 		var _meta_data = $( '#mx_builder_array_input' ).val();
 
+		if( !mx_builder_is_valid_json( _meta_data ) ) {
+
+			_meta_data = '[]';
+
+		}
+
+		// console.log( _meta_data );
+
 		return JSON.parse( _meta_data );
 
+	};
+
+	/*
+	* open editor
+	*/
+	mx_builder_app.open_editor = function() {
+
+		$( '#mx_builder_elemets_container' ).on( 'click', '.mx-builder-editable-content', function() {
+
+			// mark element
+			$( this ).addClass( 'mx_builder_edit_process' );
+
+			var content = $( this ).html();
+
+			// $( '#mx_builder_editor' ).html( content );
+
+			// show editor
+			$( '.mx_builder_text_editor_wrap' ).addClass( 'mx_builder_text_editor_visible' );
+
+			
+			tinymce.get('mx_builder_editor').setContent( content );
+
+		} );
+
+		// tinyMCE.editors.content.getContent( 'mx_builder_editor' );
+		tinymce.init({
+		  selector: '#mx_builder_editor'
+		});
+
+	};
+
+	/*
+	* close editor and save data
+	*/
+	mx_builder_app.close_editor_save_data = function() {
+
+		$( '.mx_builder_save_content' ).on( 'click', function() {
+
+			var _content = tinymce.get('mx_builder_editor').getContent();
+
+			$( '.mx_builder_edit_process' ).html( _content );
+
+			setTimeout( function() {
+
+				var html_current_builder_element = $( '.mx_builder_edit_process' ).parent().html();
+
+				// console.log( mx_builder_encode_html( html_current_builder_element ) );
+
+				$( '.mx_builder_edit_process' ).removeClass( 'mx_builder_edit_process' );
+
+				// insert shortcodes to the textarea
+				mx_builder_app.placed_shortcodes();
+
+				// create metadeta
+				mx_builder_app.save_meta_box();
+
+				// close editor
+				$( '.mx_builder_text_editor_wrap' ).removeClass( 'mx_builder_text_editor_visible' );
+
+			}, 500 );			
+
+		} );
+		
 	};
 
 	/*****************
@@ -370,7 +462,15 @@ function mx_builder_element_body( shortcode_id, template_name, template_short_na
 }
 
 // new element to the build stream
-function mx_builder_create_new_b_e_for_stream( shortcode_id, template_name, template_short_name ) {
+function mx_builder_create_new_b_e_for_stream( shortcode_id, template_name, template_short_name, full_content ) {
+
+	var get_full_content = mx_builder_get_full_content( shortcode_id );
+
+	if( full_content !== undefined ) {
+
+		get_full_content = mx_builder_decode_html( full_content );
+
+	}
 
 	var html = '';
 
@@ -388,12 +488,72 @@ function mx_builder_create_new_b_e_for_stream( shortcode_id, template_name, temp
 
 		html += '<div class="mx_builder_build_stream_element_body">';
 
-			html += 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, similique, illo. Asperiores consequatur vero aliquid repudiandae, nesciunt recusandae, qui minima, illo delectus aspernatur ducimus, eius facere consequuntur sint cumque dolor.';
+			html += get_full_content;
 
 		html += '</div>';
 
 	html += '</div>';
 
 	return html;
+
+}
+
+// get full content
+function mx_builder_get_full_content( shortcode_id ) {
+
+	var _this_content = '';
+
+	$.each( mx_builder_localize.mx_builder_list_of_items, function() {
+
+		if( this.element_id === parseInt( shortcode_id ) ) {
+
+			_this_content = this.full_content;
+
+		}
+
+	} );
+
+	return _this_content;
+
+}
+
+// encode html
+function mx_builder_encode_html( str ) {
+
+    return String( str )
+    .replace( /&/g, '&amp;' )
+    .replace( /</g, '&lt;' )
+    .replace( />/g, '&gt;' )
+    .replace( /\"/g, '&quot;' )
+    .replace( /\'/g, '&apos;' );
+
+}
+
+// decode html
+function mx_builder_decode_html( str ) {
+
+    return String( str )
+    .replace( /&amp;/g, '&' )
+    .replace( /&lt;/g, '<' )
+    .replace( /&gt;/g, '>' )
+    .replace( /&quot;/g, '\"' )
+    .replace( /&apos;/g, '\'' );
+
+}
+
+// check JSON data
+function mx_builder_is_valid_json( str ) {
+
+	if ( /^[\],:{}\s]*$/.test( str.replace(/\\["\\\/bfnrtu]/g, '@' ).
+	replace( /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']' ).
+	replace( /(?:^|:|,)(?:\s*\[)+/g, '' ) ) ) {
+
+		return true;
+
+	} else {
+
+		return false;
+
+	}
 
 }

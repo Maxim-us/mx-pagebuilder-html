@@ -45,11 +45,18 @@ class MXMPH_Admin_Main
 		$get_template_files_instance->mx_builder_parse_template_folder();
 
 		// add metabox
-		mxmph_require_class_file_admin( 'add_meta_boxes.php' );
+		mxmph_require_class_file_admin( 'add-meta-boxes.php' );
 
 		$meta_boxes_instance = new MXMPH_Add_Meta_Boxes();
 
 		$meta_boxes_instance->mx_builder_create_meta_box();
+
+		// editable content
+		mxmph_require_class_file_admin( 'editable-content.php' );
+
+		$editable_content_instance = new MXMPH_Editable_Content();
+
+		$editable_content_instance->mx_builder_add_editor();
 
 	}
 

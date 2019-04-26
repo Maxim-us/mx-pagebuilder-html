@@ -2,6 +2,6 @@
 
 <!-- Template name: 'Template 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit' -->
 
-<div class="mx-element2">
-	2Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam architecto voluptate est saepe, perspiciatis numquam hic at, dolore corrupti quasi quia earum facilis illo aliquid atque quod. Exercitationem, dolorem nostrum.	
+<div class="mx-element2 mx-builder-editable-content">
+	Second Section Content
 </div>

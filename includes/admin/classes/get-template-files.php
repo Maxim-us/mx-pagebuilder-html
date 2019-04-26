@@ -104,7 +104,8 @@ class MXMPH_Get_Template_Files
 		$element_array = array(
 			'file' 					=> $file,
 			'template_name' 		=> $template_name,
-			'template_short_name' 	=> $template_short_name
+			'template_short_name' 	=> $template_short_name,
+			'full_content' 			=> $file_content
 		);
 
 		array_push( $this->template_array, $element_array );
@@ -125,7 +126,8 @@ class MXMPH_Get_Template_Files
 
 				'element_id' 			=> $key,
 				'template_name' 		=> $value['template_name'],
-				'template_short_name' 	=> $value['template_short_name']
+				'template_short_name' 	=> $value['template_short_name'],
+				'full_content' 			=> $value['full_content']
 
 			) );		
 
@@ -161,7 +163,7 @@ class MXMPH_Get_Template_Files
 
 			ob_start();
 
-				echo $this->mx_builder_get_contents( $path_to_template_folser . $get_file );
+				echo htmlspecialchars_decode( $atts['full_content'] ); //$this->mx_builder_get_contents( $path_to_template_folser . $get_file );
 
 			return ob_get_clean();
 
