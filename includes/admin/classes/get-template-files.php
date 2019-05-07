@@ -121,13 +121,33 @@ class MXMPH_Get_Template_Files
 		$arra_items = array();
 
 		foreach ( $this->template_array as $key => $value ) {
+			
+			$_content = $value['full_content'];
+
+			preg_match_all('/<img.*?src=["\']+(.*?)["\']+/', $_content, $image_src_array);
+
+			if( $image_src_array[1] !== NULL ) {
+
+				foreach ( $image_src_array[1] as $_key => $_value ) {
+					
+					$_content = str_replace( $_value, MXMPH_PLUGIN_URL . 'includes/admin/assets/img/default_image.jpg', $_content );
+
+				}
+		
+				// add_action( 'admin_footer', function() use ($image_src_array) {
+
+				// 	var_dump($image_src_array[1]);
+
+				// } );				
+
+			}
 
 			array_push( $arra_items, array(
 
 				'element_id' 			=> $key,
 				'template_name' 		=> $value['template_name'],
 				'template_short_name' 	=> $value['template_short_name'],
-				'full_content' 			=> $value['full_content']
+				'full_content' 			=> $_content
 
 			) );		
 

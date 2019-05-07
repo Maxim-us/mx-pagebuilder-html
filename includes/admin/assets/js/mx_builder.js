@@ -48,6 +48,9 @@ jQuery( document ).ready( function( $ ) {
 		// close editor
 		mx_builder_app.close_editor_save_data();
 
+		// media lib
+		mx_builder_app.media_lib_init();
+
 	};
 
 	/*
@@ -363,7 +366,9 @@ jQuery( document ).ready( function( $ ) {
 
 		// tinyMCE.editors.content.getContent( 'mx_builder_editor' );
 		tinymce.init({
+
 		  selector: '#mx_builder_editor'
+
 		});
 
 	};
@@ -434,6 +439,41 @@ jQuery( document ).ready( function( $ ) {
 			}, 400 );
 
 		};
+
+		/*
+		* media library
+		*/
+		mx_builder_app.media_lib_init = function() {
+
+			$( '#mx_builder_elemets_container' ).on( 'click', '.mx-builder-editable-img', function() {
+
+				var _this = $( this );
+
+		        var upload = wp.media( {
+
+			        title:'Choose Image',
+
+			        multiple:false
+
+		        } ).on('select', function(){
+
+		            var select = upload.state().get('selection');
+
+		            var attach = select.first().toJSON();
+
+		            _this.attr( 'src', attach.url );
+
+		            // insert shortcodes to the textarea
+					mx_builder_app.placed_shortcodes();
+
+					// create metadeta
+					mx_builder_app.save_meta_box();
+
+		        } ).open();
+
+			} );
+
+		}
 	
 	// init
 	mx_builder_app.init();

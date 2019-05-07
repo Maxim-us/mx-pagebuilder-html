@@ -152,11 +152,11 @@
 }
 
 /*hide textarea*/
-#post-status-info,
+/*#post-status-info,
 #content {
     display: none;
 }
-
+*/
 /*hide meta data field*/
 #mx_builder_data_array_builder {
     display: none;
