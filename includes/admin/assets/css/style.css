@@ -127,9 +127,21 @@
     height: 100%;
     overflow: scroll;
     display: none;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+#wp-mx_builder_editor-wrap {
+    display: inline-block;
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+}
+#mx_builder_editor {
+    min-height: 400px;
 }
 .mx_builder_text_editor_visible {
     display: block;
+    text-align: center;
 }
 .mx_builder_text_editor_visible .mce-tinymce {
     width: 100%;
@@ -145,7 +157,7 @@
     transition: 0.4s all ease;
 }
 .mx_builder_save_content.button-primary {
-    margin: 0px auto;
+    margin: 15px auto;
     float: none;
     display: block;
     margin-bottom: 32px;
@@ -160,4 +172,15 @@
 /*hide meta data field*/
 #mx_builder_data_array_builder {
     display: none;
+}
+
+/*media*/
+@media only screen and (max-width: 800px) {
+   /* #wp-mx_builder_editor-wrap {
+        position: absolute;
+        width: 100%;
+        max-width: 800px;
+        left: 0;
+        margin-left: 0;
+    }*/
 }

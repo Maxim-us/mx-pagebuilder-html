@@ -354,7 +354,7 @@ jQuery( document ).ready( function( $ ) {
 
 			var content = $( this ).html();
 
-			// $( '#mx_builder_editor' ).html( content );
+			$( '#mx_builder_editor' ).html( content );
 
 			// show editor
 			$( '.mx_builder_text_editor_wrap' ).addClass( 'mx_builder_text_editor_visible' );
@@ -362,14 +362,14 @@ jQuery( document ).ready( function( $ ) {
 			
 			tinymce.get('mx_builder_editor').setContent( content );
 
+			// tinymce.get("mx_builder_editor").execCommand('mceInsertContent', false, content);
+
+			// console.log( tinymce.get('mx_builder_editor') );
+
+
+			
 		} );
 
-		// tinyMCE.editors.content.getContent( 'mx_builder_editor' );
-		tinymce.init({
-
-		  selector: '#mx_builder_editor'
-
-		});
 
 	};
 
