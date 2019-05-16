@@ -86,6 +86,18 @@
 .mx_builder_button_none {
     display: none !important;
 }
+.mx_builder_build_stream_element_body {
+    overflow: hidden;
+}
+.mx_builder_build_stream_element_body img {
+    max-width: 200px;
+    max-height: 200px;
+    height: auto;
+    width: auto;
+}
+.mx-builder-editable-img {
+    cursor: pointer;
+}
 
 /*effects*/
 .mx_builder_effect_move_to_top {
@@ -138,6 +150,10 @@
 }
 #mx_builder_editor {
     min-height: 400px;
+    width: 100%;
+}
+#mx_builder_editor_ifr {
+    height: 300px !important;
 }
 .mx_builder_text_editor_visible {
     display: block;
@@ -157,7 +173,7 @@
     transition: 0.4s all ease;
 }
 .mx_builder_save_content.button-primary {
-    margin: 15px auto;
+    margin: 40px auto;
     float: none;
     display: block;
     margin-bottom: 32px;

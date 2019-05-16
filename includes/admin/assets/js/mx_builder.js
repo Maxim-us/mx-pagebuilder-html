@@ -71,7 +71,7 @@ jQuery( document ).ready( function( $ ) {
 		/*
 		* plus container - list add button
 		*/
-		$( '#mx_builder_add_item_field' ).append( '<div id="mx_builder_add_button_wrap"><button id="mx_builder_add_button">+</button></div>' );
+		// $( '#mx_builder_add_item_field' ).append( '<div id="mx_builder_add_button_wrap"><button id="mx_builder_add_button">+</button></div>' );
 
 	/*
 	* set builder elements to the list

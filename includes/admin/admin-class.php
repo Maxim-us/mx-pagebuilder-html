@@ -24,6 +24,14 @@ class MXMPH_Admin_Main
 	*/
 	public function mxmph_additional_classes()
 	{
+		// show builder switcher
+		mxmph_require_class_file_admin( 'builder-switcher.php' );
+
+		MXMPH_Page_Builder_Switcher::mxmph_page_builder_switcher();
+
+		// show builder switcher
+
+		
 
 		// enqueue_scripts class
 		mxmph_require_class_file_admin( 'enqueue-scripts.php' );

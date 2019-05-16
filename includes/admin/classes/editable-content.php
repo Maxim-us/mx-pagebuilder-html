@@ -26,10 +26,6 @@ class MXMPH_Editable_Content
 
 		echo '<div class="mx_builder_text_editor_wrap">';
 
-			// wp_editor( '', 'mx_builder_editor', array(
-			// 	'textarea_name' => 'mx_builder_editor',
-			// 	'media_buttons' => 1
-			// ) );
 			echo '<textarea id="mx_builder_editor"></textarea>';
 
 			// подключаем стили, скрипты
