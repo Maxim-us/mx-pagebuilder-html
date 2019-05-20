@@ -29,29 +29,6 @@ class MXMPH_Admin_Main
 
 		MXMPH_Page_Builder_Switcher::mxmph_page_builder_switcher();
 
-		// show builder switcher
-
-		
-
-		// enqueue_scripts class
-		mxmph_require_class_file_admin( 'enqueue-scripts.php' );
-
-		MXMPH_Enqueue_Scripts::mxmph_register();
-
-		// page builder area
-		mxmph_require_class_file_admin( 'page-builder-area.php' );
-
-		$mx_builder_instance = new MXMPH_Page_Builder_Area();
-
-		$mx_builder_instance->mx_builder_enable_html_editor();
-
-		// get template files
-		mxmph_require_class_file_admin( 'get-template-files.php' );
-
-		$get_template_files_instance = new MXMPH_Get_Template_Files();
-
-		$get_template_files_instance->mx_builder_parse_template_folder();
-
 		// add metabox
 		mxmph_require_class_file_admin( 'add-meta-boxes.php' );
 
@@ -59,12 +36,36 @@ class MXMPH_Admin_Main
 
 		$meta_boxes_instance->mx_builder_create_meta_box();
 
-		// editable content
-		mxmph_require_class_file_admin( 'editable-content.php' );
+		// builder switcher
+		if( mxmph_builder_enable() ) {
 
-		$editable_content_instance = new MXMPH_Editable_Content();
+			// enqueue_scripts class
+			mxmph_require_class_file_admin( 'enqueue-scripts.php' );
 
-		$editable_content_instance->mx_builder_add_editor();
+			MXMPH_Enqueue_Scripts::mxmph_register();
+
+			// page builder area
+			mxmph_require_class_file_admin( 'page-builder-area.php' );
+
+			$mx_builder_instance = new MXMPH_Page_Builder_Area();
+
+			$mx_builder_instance->mx_builder_enable_html_editor();
+
+			// get template files
+			mxmph_require_class_file_admin( 'get-template-files.php' );
+
+			$get_template_files_instance = new MXMPH_Get_Template_Files();
+
+			$get_template_files_instance->mx_builder_parse_template_folder();			
+
+			// editable content
+			mxmph_require_class_file_admin( 'editable-content.php' );
+
+			$editable_content_instance = new MXMPH_Editable_Content();
+
+			$editable_content_instance->mx_builder_add_editor();
+
+		}
 
 	}
 

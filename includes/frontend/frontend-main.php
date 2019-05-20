@@ -25,6 +25,11 @@ class MXMPH_FrontEnd_Main
 
 		MXMPH_Enqueue_Scripts_Frontend::mxmph_register();
 
+		// create shortcodes
+		mxmph_require_class_file_frontend( 'create-shortcodes.php' );
+
+		MXMPH_Create_Shortcodes::mx_builder_create_shortcode();
+
 	}
 
 }

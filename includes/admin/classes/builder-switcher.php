@@ -49,16 +49,7 @@ class MXMPH_Page_Builder_Switcher
 					$mx_builder_enable = true;
 
 				}
-
-				// $data = array($key => $value);
 				
-				// add_action( 'admin_footer', function() use ( $data ) {
-
-				// 	var_dump($data);
-
-
-				// } );
-
 			}
 
 		}
@@ -141,10 +132,11 @@ class MXMPH_Page_Builder_Switcher
 			// get option array
 			$get_builder_switcher_array_option = get_option( 'mx_builder_switcher_post_array' );
 
-			// if option not exists
-			if( $get_builder_switcher_array_option == false ) {
+			// if youser press enable builder button
+			if( $_post['button_id'] == 'mxmph_enable_mx_builder' ) {				
 
-				if( $_post['button_id'] == 'mxmph_enable_mx_builder' ) {
+				// if option not exists
+				if( $get_builder_switcher_array_option == false ) {
 
 					$get_builder_switcher_array_option = array( $_post['post_id'] );
 
@@ -152,14 +144,9 @@ class MXMPH_Page_Builder_Switcher
 
 					update_option( 'mx_builder_switcher_post_array', $builder_switcher_post_array );
 
-				}			
+				} else {
 
-			} else {
-
-				// if option not exists
-
-				if( $_post['button_id'] == 'mxmph_enable_mx_builder' ) {
-
+					// if option not exists
 					$new_post_id = true;
 
 					$builder_switcher_option = maybe_unserialize( $get_builder_switcher_array_option );
@@ -186,6 +173,43 @@ class MXMPH_Page_Builder_Switcher
 					}
 
 				}
+
+			}
+
+			// enable wp editor
+			if( $_post['button_id'] == 'mxmph_enable_wp_editor' ) {
+
+				// if option exists
+				if( $get_builder_switcher_array_option !== false ) {
+
+					$builder_switcher_post_array = maybe_unserialize( $get_builder_switcher_array_option );
+
+					// if post id setted
+					$enable_wp_editor = false;
+
+					foreach ( $builder_switcher_post_array as $key => $value ) {
+
+						if( intval( $_post['post_id'] ) == intval( $value ) ) {
+
+							$enable_wp_editor = true;
+
+							// remove array items
+							unset( $builder_switcher_post_array[$key] );
+
+						}
+
+					}
+
+					// update option
+					if( $enable_wp_editor == true ) {						
+
+						$builder_switcher_option = maybe_serialize( $builder_switcher_post_array );
+
+						update_option( 'mx_builder_switcher_post_array', $builder_switcher_option );
+
+					}					
+
+				}				
 
 			}
 

@@ -60,7 +60,7 @@ final class MXMPHMXPageBuilderHTML
 	{
 
 		// Part of the Frontend
-		// require_once MXMPH_PLUGIN_ABS_PATH . 'includes/frontend/frontend-main.php';
+		require_once MXMPH_PLUGIN_ABS_PATH . 'includes/frontend/frontend-main.php';
 	
 	}
 

@@ -1,15 +1,3 @@
-// mx_builder_localize.mx_builder_list_of_items = [
-// 	{
-// 		element_id: 1
-// 	},
-// 	{
-// 		element_id: 2
-// 	},
-// 	{
-// 		element_id: 3
-// 	}
-// ];
-
 jQuery( document ).ready( function( $ ) {
 
 	// add button before #content
@@ -50,6 +38,9 @@ jQuery( document ).ready( function( $ ) {
 
 		// media lib
 		mx_builder_app.media_lib_init();
+
+		// insert shortcodes to the textarea
+		mx_builder_app.placed_shortcodes();
 
 	};
 
@@ -270,11 +261,11 @@ jQuery( document ).ready( function( $ ) {
 	*/ 
 	mx_builder_app.repair_builder = function() {		
 
-		var meta_data_arry = mx_builder_app.get_meta_box();
+		var meta_data_array = mx_builder_app.get_meta_box();
 
-		// console.log( meta_data_arry );
+		// console.log( meta_data_array );
 
-		$.each( meta_data_arry, function() {
+		$.each( meta_data_array, function() {
 
 			var _this = this;
 
@@ -335,8 +326,6 @@ jQuery( document ).ready( function( $ ) {
 			_meta_data = '[]';
 
 		}
-
-		// console.log( _meta_data );
 
 		return JSON.parse( _meta_data );
 
@@ -584,9 +573,7 @@ function mx_builder_decode_html( str ) {
 // check JSON data
 function mx_builder_is_valid_json( str ) {
 
-	if ( /^[\],:{}\s]*$/.test( str.replace(/\\["\\\/bfnrtu]/g, '@' ).
-	replace( /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']' ).
-	replace( /(?:^|:|,)(?:\s*\[)+/g, '' ) ) ) {
+	if ( str.length ) {
 
 		return true;
 

@@ -55,21 +55,7 @@ class MXMPH_Get_Template_Files
 		}
 
 		// wp_localize_script
-		$this->mx_builder_wp_localize_script();		
-
-		// register shortcode
-		$this->mx_builder_create_shortcode();
-
-		// $args = array(
-		// 	'elements_array' => $this->template_array
-		// );
-
-		// place to header
-		// add_action( 'admin_head', function() use ( $args ) {
-
-		// 	var_dump( $args['elements_array'] );
-
-		// }, 10, 1 );
+		$this->mx_builder_wp_localize_script();
 
 	}
 
@@ -132,13 +118,7 @@ class MXMPH_Get_Template_Files
 					
 					$_content = str_replace( $_value, MXMPH_PLUGIN_URL . 'includes/admin/assets/img/default_image.jpg', $_content );
 
-				}
-		
-				// add_action( 'admin_footer', function() use ($image_src_array) {
-
-				// 	var_dump($image_src_array[1]);
-
-				// } );				
+				}			
 
 			}
 
@@ -171,27 +151,27 @@ class MXMPH_Get_Template_Files
 	/*
 	* create shortcode
 	*/
-	public function mx_builder_create_shortcode()
-	{
+	// public function mx_builder_create_shortcode()
+	// {
 
 
-		add_shortcode( 'mx_builder_elemet', function( $atts ) {
+	// 	add_shortcode( 'mx_builder_elemet', function( $atts ) {
 
-			$path_to_template_folser = $this->template_dir;
+	// 		$path_to_template_folser = $this->template_dir;
 
-			$get_file = $this->template_array[$atts['shortcode_id']]['file'];
+	// 		$get_file = $this->template_array[$atts['shortcode_id']]['file'];
 
-			ob_start();
+	// 		ob_start();
 
-				echo htmlspecialchars_decode( $atts['full_content'] ); //$this->mx_builder_get_contents( $path_to_template_folser . $get_file );
+	// 			echo htmlspecialchars_decode( $atts['full_content'] ); //$this->mx_builder_get_contents( $path_to_template_folser . $get_file );
 
-			return ob_get_clean();
+	// 		return ob_get_clean();
 
-			// return $atts['shortcode_id'];
+	// 		// return $atts['shortcode_id'];
 
-		} );
+	// 	} );
 
-	}
+	// }
 
 		/*
 		* get contents

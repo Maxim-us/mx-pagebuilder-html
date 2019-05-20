@@ -31,7 +31,8 @@ function mxmph_update_switcher_button_option( data ) {
 
 	jQuery.post( ajaxurl, data, function( response ) {
 
-		console.log( response );
+		// console.log( response );
+		location.reload();
 
 	} );
 
