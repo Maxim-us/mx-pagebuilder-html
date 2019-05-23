@@ -1,6 +1,6 @@
 <!-- Template short name: 'First Section' -->
 
-<!-- Template name: 'Template 1. Lorem ipsum dolor sit amet, consectetur adipisicing elit' -->
+<!-- Template name: 'There is an image and a text box that can be edited' -->
 
 <div>
 	<img src="1.jpg" alt="" class="mx-builder-editable-img" />

@@ -139,17 +139,21 @@ jQuery( document ).ready( function( $ ) {
 
 		$( '#mx_builder_elemets_container' ).on( 'click', '.mx_builder_build_stream_element_remove_element', function() {
 
-			// remove element
-			$( this ).parent().parent().remove();
+			if( confirm( 'Do you want to remove this element?' ) ) {
 
-			// management
-			mx_builder_app.show_management_button();
+				// remove element
+				$( this ).parent().parent().remove();
 
-			// insert shortcodes to the textarea
-			mx_builder_app.placed_shortcodes();
+				// management
+				mx_builder_app.show_management_button();
 
-			// create metadeta
-			mx_builder_app.save_meta_box();
+				// insert shortcodes to the textarea
+				mx_builder_app.placed_shortcodes();
+
+				// create metadeta
+				mx_builder_app.save_meta_box();
+
+			}			
 
 		} );
 
@@ -507,7 +511,7 @@ function mx_builder_create_new_b_e_for_stream( shortcode_id, template_name, temp
 
 		html += '<div class="mx_builder_build_stream_element_header">';
 
-			html += '<div>El. - ' + template_short_name + '</div>';
+			html += '<div class="mx_template_short_name">' + template_short_name + '</div>';
 
 			html += '<div class="mx_builder_build_stream_element_management"><span class="mx_builder_b_s_e_lift_item">To top</span><span class="mx_builder_b_s_e_drop_item">To bottom</span></div>';
 

@@ -24,20 +24,31 @@ class MXMPH_Admin_Main
 	*/
 	public function mxmph_additional_classes()
 	{
-		// show builder switcher
-		mxmph_require_class_file_admin( 'builder-switcher.php' );
 
-		MXMPH_Page_Builder_Switcher::mxmph_page_builder_switcher();
+		// if classic editor is enable
+		if( mxmph_classic_editor_is_anable() ) {
 
-		// add metabox
-		mxmph_require_class_file_admin( 'add-meta-boxes.php' );
+			// show builder switcher
+			mxmph_require_class_file_admin( 'builder-switcher.php' );
 
-		$meta_boxes_instance = new MXMPH_Add_Meta_Boxes();
+			MXMPH_Page_Builder_Switcher::mxmph_page_builder_switcher();
 
-		$meta_boxes_instance->mx_builder_create_meta_box();
+			// add metabox
+			mxmph_require_class_file_admin( 'add-meta-boxes.php' );
+
+			$meta_boxes_instance = new MXMPH_Add_Meta_Boxes();
+
+			$meta_boxes_instance->mx_builder_create_meta_box();
+
+		} else {
+
+			// Show the notification about the require for a classic editor
+			mxmph_classic_editor_notification();
+
+		}
 
 		// builder switcher
-		if( mxmph_builder_enable() ) {
+		if( mxmph_builder_enable() && mxmph_classic_editor_is_anable() ) {
 
 			// enqueue_scripts class
 			mxmph_require_class_file_admin( 'enqueue-scripts.php' );

@@ -61,3 +61,49 @@ function mxmph_builder_enable() {
 	return $builder_enable;
 
 }
+
+/*
+* Check if classic editor is enable
+*/
+function mxmph_classic_editor_is_anable() {
+
+	$active_plugins = get_option( 'active_plugins' );
+
+	$array_of_active_plugins = maybe_unserialize( $active_plugins );
+
+	$classic_editor_enable = false;
+
+	foreach ( $array_of_active_plugins as $key => $value) {
+
+		if( $value == 'classic-editor/classic-editor.php' ) {
+
+			$classic_editor_enable = true;
+
+		}
+
+	}
+
+	return $classic_editor_enable;
+
+}
+
+/*
+* The notification about the require for a classic editor
+*/
+function mxmph_classic_editor_notification() {
+
+	add_action( 'admin_notices', function() {
+
+		?>
+	    <div class="notice notice-warning is-dismissible">
+
+	        <p>Plugin "MX PageBuilder HTML" require the <a href="https://wordpress.org/plugins/classic-editor/" target="_blank">Classic Editor</a></p> 
+	        <p>
+	        	<a href="<?php echo admin_url(); ?>plugin-install.php?s=Classic+Editor&tab=search&type=term">Install</a> Classic Editor now.
+	        </p>       
+	    </div>
+	    <?php
+
+	} );
+
+}
