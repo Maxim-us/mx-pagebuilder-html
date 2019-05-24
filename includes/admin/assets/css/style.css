@@ -170,7 +170,8 @@
 }
 
 /*editor*/
-.mx_builder_text_editor_wrap {
+.mx_builder_text_editor_wrap,
+.mx_builder_simple_text_editor_wrap {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -182,6 +183,14 @@
     display: none;
     padding-top: 50px;
     padding-bottom: 50px;
+}
+#mx_builder_simple_text_editor {
+    width: 100%;
+    max-width: 800px;
+    margin: 0px auto;
+    display: block;
+    min-height: 400px;
+    height: 400px;
 }
 #wp-mx_builder_editor-wrap {
     display: inline-block;
@@ -209,7 +218,6 @@
     cursor: pointer;
     padding: 6px;
     position: relative;
-    max-height: 100px;
 }
 .mx-builder-editable-content p {
     margin: 0;
@@ -233,11 +241,15 @@
     top: 50%;
     margin-top: -10px;
 }
-.mx_builder_save_content.button-primary {
+.mx_builder_save_content.button-primary,
+.mx_builder_save_simple_text.button-primary {
     margin: 40px auto;
     float: none;
     display: block;
     margin-bottom: 32px;
+}
+.mx_builder_simple_text_editor_body {
+
 }
 
 /*hide textarea*/

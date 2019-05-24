@@ -4,6 +4,9 @@
 
 <div>
 	<img src="1.jpg" alt="" class="mx-builder-editable-img" />
+
+	<h2 class="mx-builder-editable-text">First Section Heading</h2>
+	
 	<div class="mx-element1 mx-builder-editable-content">
 		First Section Content
 	</div>

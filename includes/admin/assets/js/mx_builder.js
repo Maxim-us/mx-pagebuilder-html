@@ -30,11 +30,19 @@ jQuery( document ).ready( function( $ ) {
 		// meta
 		mx_builder_app.repair_builder();
 
-		// open editor
-		mx_builder_app.open_editor();
+		// WP Editor
+			// open editor
+			mx_builder_app.open_editor();
 
-		// close editor
-		mx_builder_app.close_editor_save_data();
+			// close editor
+			mx_builder_app.close_editor_save_data();
+
+		// Simple Editor
+			// open
+			mx_builder_app.open_simple_editor();
+
+			// close
+			mx_builder_app.close_simple_editor_save_data();
 
 		// media lib
 		mx_builder_app.media_lib_init();
@@ -335,6 +343,7 @@ jQuery( document ).ready( function( $ ) {
 
 	};
 
+	// WordPress Editor
 	/*
 	* open editor
 	*/
@@ -397,8 +406,100 @@ jQuery( document ).ready( function( $ ) {
 			}, 500 );			
 
 		} );
+
+		// click on empty space around the editor
+		$( '.mx_builder_text_editor_wrap' ).on( 'click', function( e ) {
+
+			var editor = $( '#wp-mx_builder_editor-wrap' );
+			
+			if( !editor.is( e.target ) && editor.has( e.target).length === 0 ){
+
+				setTimeout( function() {
+
+					// close editor
+					$( '.mx_builder_text_editor_wrap' ).removeClass( 'mx_builder_text_editor_visible' );
+
+				},500 );
+
+			}
+			
+		} );
 		
 	};
+
+	// Simple Editor
+	/*
+	* Open simple editor
+	*/
+	mx_builder_app.open_simple_editor = function() {
+
+		$( '#mx_builder_elemets_container' ).on( 'click', '.mx-builder-editable-text', function() {
+
+			// mark element
+			$( this ).addClass( 'mx_builder_edit_process' );
+
+			var content = $( this ).html();
+
+			console.log( content );
+			
+			$( '#mx_builder_simple_text_editor' ).val( content );
+
+			// show editor
+			$( '.mx_builder_simple_text_editor_wrap' ).addClass( 'mx_builder_text_editor_visible' );
+
+		} );
+
+	};
+
+	/*
+	* Close simple editor
+	*/
+	mx_builder_app.close_simple_editor_save_data = function() {
+
+		// save data
+		$( '.mx_builder_save_simple_text' ).on( 'click', function() {
+
+			var _content = $( '#mx_builder_simple_text_editor' ).val();
+
+			$( '.mx_builder_edit_process' ).html( _content );
+
+			setTimeout( function() {
+
+				$( '.mx_builder_edit_process' ).removeClass( 'mx_builder_edit_process' );
+
+				// insert shortcodes to the textarea
+				mx_builder_app.placed_shortcodes();
+
+				// create metadeta
+				mx_builder_app.save_meta_box();
+
+				// close editor
+				$( '.mx_builder_simple_text_editor_wrap' ).removeClass( 'mx_builder_text_editor_visible' );
+
+			}, 500 );			
+
+		} );
+
+		// click on empty space around the editor
+		$( '.mx_builder_simple_text_editor_wrap' ).on( 'click', function( e ) {
+
+			var editor = $( '#mx_builder_simple_text_editor' );
+			
+			if( !editor.is( e.target ) && editor.has( e.target).length === 0 ){
+
+				setTimeout( function() {
+
+					// close editor
+					$( '.mx_builder_simple_text_editor_wrap' ).removeClass( 'mx_builder_text_editor_visible' );
+
+				},500 );
+
+			}
+			
+		} );
+
+	};
+
 
 	/*****************
 	* effects

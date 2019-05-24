@@ -17,10 +17,17 @@ class MXMPH_Editable_Content
 	public function mx_builder_add_editor()
 	{
 
+		// create WP editor
 		add_action( 'admin_footer', array( $this, 'mx_builder_editor_body' ) );
-	
+
+		// create simple textarea
+		add_action( 'admin_footer', array( $this, 'mx_builder_simple_textarea_body' ) );
+			
 	}
 
+	/*
+	* Create WP editor
+	*/
 	public function mx_builder_editor_body()
 	{
 
@@ -38,7 +45,7 @@ class MXMPH_Editable_Content
 
 					wp.editor.initialize( 'mx_builder_editor', {
 						tinymce: {
-							wpautop  : true,
+							wpautop  : false,
 							theme    : 'modern',
 							skin     : 'lightgray',
 							language : 'en',
@@ -89,6 +96,26 @@ class MXMPH_Editable_Content
 			<?php
 
 			echo '<button class="mx_builder_save_content button button-primary button-large">Save Data</button>';
+
+		echo '</div>';
+
+	}
+
+	/*
+	* Create simple textarea
+	*/
+	public function mx_builder_simple_textarea_body()
+	{
+
+		echo '<div class="mx_builder_simple_text_editor_wrap">';
+
+			echo '<div class="mx_builder_simple_text_editor_body">';
+
+				echo '<textarea id="mx_builder_simple_text_editor"></textarea>';
+
+				echo '<button class="mx_builder_save_simple_text button button-primary button-large">Save Data</button>';
+
+			echo '</div>';
 
 		echo '</div>';
 
