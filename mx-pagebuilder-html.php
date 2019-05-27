@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: MX PageBuilder HTML
-Plugin URI: https://github.com/Maxim-us/wp-plugin-skeleton
-Description: Brief description
+Plugin URI: https://github.com/Maxim-us/mx-pagebuilder-html
+Description: This plugin will help you create fully editable content on your website.
 Author: Marko Maksym
 Version: 1.0
 Author URI: https://github.com/Maxim-us
@@ -74,7 +74,7 @@ if ( ! defined( 'MXMPH_PLUGIN_ABS_PATH' ) ) {
 if ( ! defined( 'MXMPH_PLUGIN_VERSION' ) ) {
 
 	// version
-	define( 'MXMPH_PLUGIN_VERSION', time() ); // Must be replaced before production on for example '1.0'
+	define( 'MXMPH_PLUGIN_VERSION', '1.0' ); // Must be replaced before production on for example '1.0'
 
 }
 

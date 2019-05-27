@@ -1,42 +1,62 @@
 === MX PageBuilder HTML ===
 Contributors: markomaksym
-Tags: buddypress, activity, activity stream, buddypress activity, embed, attach
-Requires at least: 4.3
+Tags: page builder, editor
+Requires at least: 5.2
 Tested up to: 4.9
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Brief description
+This plugin will help you create fully editable content on your website.
 
 == Description ==
 
-Long description
+<p>
+	There are a lot of different WordPress page builders and I've also wanted to create one.)
+
+</p>
+
+<p>
+	When I was creating a website I had a problem, how to allow my client to edit some text and images from the content? Now, this problem's disappeared. Almost )
+</p>
+
+<p>
+	Let me to introduce you my new WordPress plugin "MX PageBuilder HTML". Why HTML? I hope you'll understand it from the video. Sorry, it's a bit longer that you could suppose.
+</p>
+
+<p>
+	You can download it here: https://github.com/Maxim-us/mx-pagebuilder-html
+</p>
+
+<p>
+	PS I've showed the most quickly way, how to create a website. I've missed many of steps in the setup process when Wordpress Website's creating in the video.
+</p>
+
+<p>
+	<b>How does it work?</b>
+</p>
+
+<iframe width="600" height="320" src="https://www.youtube.com/embed/XT0PoampFtE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 == Installation ==
 
 = From your WordPress dashboard =
 
 1. Visit 'Plugins > Add New'
-2. Search for 'WP Plugin Skeleton'
+2. Search for 'MX PageBuilder HTML'
 3. Activate the plugin from your Plugins page.
-4. ...
 
 = From WordPress.org =
 
-1. Download 'WP Plugin Skeleton'.
-2. Upload the 'WP Plugin Skeleton' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
-3. Activate 'WP Plugin Skeleton' from your Plugins page.
-4. ...
+1. Download 'MX PageBuilder HTML'.
+2. Upload the 'MX PageBuilder HTML' directory to your '/wp-content/plugins/' directory, using your favorite method (ftp, sftp, scp, etc...)
+3. Activate 'MX PageBuilder HTML' from your Plugins page.
 
 == Screenshots ==
 
-1. Click the button
-2. Item moved upwards
-3. Click the button again
-4. ...
+1. Admin Dashboard
 
 == Changelog ==
 
 = 1.0 =
-* Your first commit
+* MX PageBuilder HTML
