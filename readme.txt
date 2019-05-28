@@ -2,7 +2,7 @@
 Contributors: markomaksym
 Tags: page builder, editor
 Requires at least: 5.2
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -10,6 +10,10 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 This plugin will help you create fully editable content on your website.
 
 == Description ==
+
+<p>
+	This plugin is suitable for webmasters or people who can make changes to html code.
+</p>
 
 <p>
 	There are a lot of different WordPress page builders and I've also wanted to create one.)
@@ -22,10 +26,6 @@ This plugin will help you create fully editable content on your website.
 
 <p>
 	Let me to introduce you my new WordPress plugin "MX PageBuilder HTML". Why HTML? I hope you'll understand it from the video. Sorry, it's a bit longer that you could suppose.
-</p>
-
-<p>
-	You can download it here: https://github.com/Maxim-us/mx-pagebuilder-html
 </p>
 
 <p>
